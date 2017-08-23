@@ -198,17 +198,28 @@ var playState = {
       touchLeft.events.onInputDown.add(touchLeftPressed, this);
       touchLeft.events.onInputUp.add(touchLeftReleased, this);
 
-      touchDrop = game.add.sprite(blockSize * 5, blockSize * 15.5, 'touchDrop');
+      if(touchPreference == 0){
+        touchDrop = game.add.sprite(blockSize * 4.6, blockSize * 15.5, 'touchDrop');
+
+        touchRotate = game.add.sprite(playareaEnd + blockSize * 1.45, blockSize * 15.5, 'touchRotate');
+
+        touchRight = game.add.sprite(playareaEnd + blockSize * 5.5, blockSize * 15.5, 'touchRight');
+      }else{
+        touchDrop = game.add.sprite(playareaEnd + blockSize * 1.45, blockSize * 15.5, 'touchDrop');
+
+        touchRotate = game.add.sprite(playareaEnd + blockSize * 5.5, blockSize * 15.5, 'touchRotate');
+
+        touchRight = game.add.sprite(blockSize * 4.6, blockSize * 15.5, 'touchRight');
+      }
+
       touchDrop.inputEnabled = true;
       touchDrop.events.onInputDown.add(touchDropPressed);
       touchDrop.events.onInputUp.add(touchDropReleased, this);
 
-      touchRotate = game.add.sprite(playareaEnd + blockSize, blockSize * 15.5, 'touchRotate');
       touchRotate.inputEnabled = true;
       touchRotate.events.onInputDown.add(touchRotatePressed);
       touchRotate.events.onInputUp.add(touchRotateReleased, this);
 
-      touchRight = game.add.sprite(playareaEnd + blockSize * 5.5, blockSize * 15.5, 'touchRight');
       touchRight.inputEnabled = true;
       touchRight.events.onInputDown.add(touchRightPressed);
       touchRight.events.onInputUp.add(touchRightReleased, this);
