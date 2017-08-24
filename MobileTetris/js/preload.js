@@ -12,7 +12,7 @@ var preloadState = {
     game.scale.minHeight = 320;
     game.scale.maxWidth = 1920;
     game.scale.maxHeight = 1280;
-    //game.scale.pageAlignHorizontally = true;
+    game.scale.pageAlignHorizontally = true;
     //game.scale.pageAlignVertically = true;
     game.scale.refresh();
     game.state.start('menu');
