@@ -305,6 +305,8 @@ function goFullscreen(){
   playClickSound();
   goFullscreenButton.kill();
   exitFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'exitFullscreenButton', exitFullscreen, this);
+  game.scale.maxWidth = 3840;
+  game.scale.maxHeight = 2160;
   game.scale.startFullScreen(false);
 }
 
@@ -312,6 +314,8 @@ function exitFullscreen(){
   playClickSound();
   exitFullscreenButton.kill();
   goFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'goFullscreenButton', goFullscreen, this);
+  game.scale.maxWidth = 960;
+  game.scale.maxHeight = 640;
   game.scale.stopFullScreen();
 }
 
