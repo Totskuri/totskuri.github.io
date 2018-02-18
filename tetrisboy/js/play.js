@@ -34,8 +34,6 @@ var paused;
 var menuClicked;
 var animationAdded;
 var gameOverBool;
-var controlScheme; // 0 for keyboard, 1 for touch
-var touchPreference; // 0 for left, 1 for right
 
 var currentBlocks;
 var stageBlocks;
@@ -57,14 +55,6 @@ var wKey;
 var aKey;
 var sKey;
 var dKey;
-var touchLeft;
-var touchRight;
-var touchDrop;
-var touchRotate;
-var touchLeftIsDown;
-var touchRightIsDown;
-var touchDropIsDown;
-var touchRotateIsDown;
 
 var loadingScreen;
 
@@ -129,13 +119,6 @@ var playState = {
     game.load.audio('moveSound', 'assets/sound/moveSound.ogg');
     game.load.audio('playMusic', 'assets/sound/playMusic.ogg');
 
-    if(controlScheme == 1){
-      game.load.image('touchLeft', 'assets/touchLeft.png');
-      game.load.image('touchRight', 'assets/touchRight.png');
-      game.load.image('touchDrop', 'assets/touchDrop.png');
-      game.load.image('touchRotate', 'assets/touchRotate.png');
-    }
-
     currentBlocks = game.add.group();
     stageBlocks = game.add.group();
     nextBlocks = game.add.group();
@@ -163,10 +146,6 @@ var playState = {
     currentBlockType = 0;
     softDropSpeed = 0.05;
     stageMatrixEmpty();
-    touchLeftIsDown = false;
-    touchRightIsDown = false;
-    touchDropIsDown = false;
-    touchRotateIsDown = false;
     menuClicked = false;
 
     exitButton = game.add.button(blockSize * 22, blockSize * 0.5, 'mainMenuButton', backToMainMenu, this, 0, 0, 0);
@@ -191,39 +170,6 @@ var playState = {
     aKey = game.input.keyboard.addKey(Phaser.Keyboard.A);
     sKey = game.input.keyboard.addKey(Phaser.Keyboard.S);
     dKey = game.input.keyboard.addKey(Phaser.Keyboard.D);
-
-    if(controlScheme == 1){
-      touchLeft = game.add.sprite(blockSize * 0.5, blockSize * 15.5, 'touchLeft');
-      touchLeft.inputEnabled = true;
-      touchLeft.events.onInputDown.add(touchLeftPressed, this);
-      touchLeft.events.onInputUp.add(touchLeftReleased, this);
-
-      if(touchPreference == 0){
-        touchDrop = game.add.sprite(blockSize * 4.6, blockSize * 15.5, 'touchDrop');
-
-        touchRotate = game.add.sprite(playareaEnd + blockSize * 1.45, blockSize * 15.5, 'touchRotate');
-
-        touchRight = game.add.sprite(playareaEnd + blockSize * 5.5, blockSize * 15.5, 'touchRight');
-      }else{
-        touchDrop = game.add.sprite(playareaEnd + blockSize * 1.45, blockSize * 15.5, 'touchDrop');
-
-        touchRotate = game.add.sprite(playareaEnd + blockSize * 5.5, blockSize * 15.5, 'touchRotate');
-
-        touchRight = game.add.sprite(blockSize * 4.6, blockSize * 15.5, 'touchRight');
-      }
-
-      touchDrop.inputEnabled = true;
-      touchDrop.events.onInputDown.add(touchDropPressed);
-      touchDrop.events.onInputUp.add(touchDropReleased, this);
-
-      touchRotate.inputEnabled = true;
-      touchRotate.events.onInputDown.add(touchRotatePressed);
-      touchRotate.events.onInputUp.add(touchRotateReleased, this);
-
-      touchRight.inputEnabled = true;
-      touchRight.events.onInputDown.add(touchRightPressed);
-      touchRight.events.onInputUp.add(touchRightReleased, this);
-    }
 
     rotateSound = game.add.audio('rotateSound');
     rotateSound.volume = 0.5;
@@ -444,24 +390,12 @@ function playAgain(){
   game.state.start('play');
 }
 
-function setControlSchemeKeyboard(){
-  controlScheme = 0;
-}
-
-function setControlSchemeTouch(){
-  controlScheme = 1;
-}
-
 function setSoundEnabled(bool){
   soundEnabled = bool;
 }
 
 function setMusicEnabled(bool){
   musicEnabled = bool;
-}
-
-function setTouchPreference(val){
-  touchPreference = val;
 }
 
 function playSoundEffect(soundEffect){

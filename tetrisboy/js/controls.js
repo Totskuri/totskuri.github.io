@@ -9,7 +9,6 @@ var moveStartTime = 0.3;
 var moveTime = 0.1;
 
 function checkControls(currentBlocks, cursors, enter, paused){
-  if(controlScheme == 0){ //keyboard
     if(canContinueWithControls()){
         if (cursors.left.isDown || aKey.isDown){
             //  Move to the left
@@ -80,7 +79,6 @@ function checkControls(currentBlocks, cursors, enter, paused){
       if(enter.isUp){
         enterKey = false;
       }
-    }
 }
 
 function canContinueWithControls(){
@@ -105,73 +103,5 @@ function rightTimeHasPassed(){
       currentBlocks.x += blockSize;
     }
     currentEventRight = game.time.events.add(Phaser.Timer.SECOND * moveTime, rightTimeHasPassed, this);
-  }
-}
-
-function touchLeftPressed(){
-  if(canContinueWithControls()){
-    //  Move to the left
-    if(!touchLeftIsDown){
-      if(checkBoundsX(currentBlocks, -blockSize)){
-        currentBlocks.x -= blockSize;
-      }
-      touchLeftIsDown = true;
-      currentEventLeft = game.time.events.add(Phaser.Timer.SECOND * moveStartTime, leftTimeHasPassed, this);
-    }
-  }
-}
-
-function touchLeftReleased(){
-  touchLeftIsDown = false;
-  if(currentEventLeft != null){
-    game.time.events.remove(currentEventLeft);
-  }
-}
-
-function touchDropPressed(){
-  if(canContinueWithControls()){
-    if(!touchDropIsDown){
-      softDropStart();
-      touchDropIsDown = true;
-    }
-  }
-}
-
-function touchDropReleased(){
-  if(touchDropIsDown){
-    softDropEnd();
-  }
-  touchDropIsDown = false;
-}
-
-function touchRotatePressed(){
-  if(canContinueWithControls()){
-    if(!touchRotateIsDown){
-      rotateBlock(currentBlocks);
-      touchRotateIsDown = true;
-    }
-  }
-}
-
-function touchRotateReleased(){
-  touchRotateIsDown = false;
-}
-
-function touchRightPressed(){
-  if(canContinueWithControls()){
-    if(!touchRightIsDown){
-      if(checkBoundsX(currentBlocks, blockSize)){
-        currentBlocks.x += blockSize;
-      }
-      touchRightIsDown = true;
-      currentEventRight = game.time.events.add(Phaser.Timer.SECOND * moveStartTime, rightTimeHasPassed, this);
-    }
-  }
-}
-
-function touchRightReleased(){
-  touchRightIsDown = false;
-  if(currentEventRight != null){
-    game.time.events.remove(currentEventRight);
   }
 }

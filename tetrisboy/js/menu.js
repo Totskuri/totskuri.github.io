@@ -1,19 +1,13 @@
 var playButton;
 var backButton;
 var exitButton;
-var keyboardButton;
-var touchButton;
 var instructionsButton;
 var instructionsWindow;
 var chooseLevelText;
 var preferencesButton;
 var preferencesWindow;
-var goFullscreenButton;
-var exitFullscreenButton;
 var soundButton;
 var musicButton;
-var touchPreferenceButtonLeft;
-var touchPreferenceButtonRight;
 var levelButton0;
 var levelButton1;
 var levelButton2;
@@ -39,12 +33,8 @@ var menuState = {
     game.load.image('chooseLevelText', 'assets/menu/chooseLevelText.png');
     game.load.image('instructionsButton', 'assets/menu/instructionsButton.png');
     game.load.image('instructionsWindow', 'assets/menu/instructionsWindow.png');
-    game.load.image('keyboardButton', 'assets/menu/keyboardButton.png');
-    game.load.image('touchButton', 'assets/menu/touchButton.png');
     game.load.image('preferencesButton', 'assets/menu/preferencesButton.png');
     game.load.image('preferencesWindow', 'assets/menu/preferencesWindow.png');
-    game.load.image('goFullscreenButton', 'assets/menu/goFullscreenButton.png');
-    game.load.image('exitFullscreenButton', 'assets/menu/exitFullscreenButton.png');
     game.load.image('checkBoxEmpty', 'assets/menu/checkBoxEmpty.png');
     game.load.image('checkBoxFilled', 'assets/menu/checkBoxFilled.png');
     game.load.image('exitButton', 'assets/menu/exitButton.png');
@@ -83,11 +73,6 @@ var menuState = {
     }else{
       setMusicEnabled(true);
     }
-    if(localStorage.getItem('touchControlPreference') != null){
-      setTouchPreference(localStorage.getItem('touchControlPreference'));
-    }else{
-      setTouchPreference(0);
-    }
 
     createPlayAndInstructionsButtons();
 
@@ -103,15 +88,9 @@ var menuState = {
 };
 
 function createPlayAndInstructionsButtons(){
-  playButton = game.add.button(blockSize * 11, blockSize * 7, 'playButton', chooseControls, this);
+  playButton = game.add.button(blockSize * 11, blockSize * 7, 'playButton', chooseLevel, this);
   preferencesButton = game.add.button(blockSize * 9, blockSize * 10, 'preferencesButton', showPreferences, this);
   instructionsButton = game.add.button(blockSize * 9, blockSize * 12, 'instructionsButton', showInstructions, this);
-}
-
-function createChooseControlsButtons(){
-  keyboardButton = game.add.button(blockSize * 10, blockSize * 8, 'keyboardButton', keyboardChosen, this);
-  touchButton = game.add.button(blockSize * 16, blockSize * 8, 'touchButton', touchChosen, this);
-  backButton = game.add.button(blockSize * 16, blockSize * 12, 'backButton', backToMenu, this);
 }
 
 function playClickSound(){
@@ -120,30 +99,12 @@ function playClickSound(){
   }
 }
 
-function chooseControls(){
-  playClickSound();
-  playButton.kill();
-  instructionsButton.kill();
-  preferencesButton.kill();
-  createChooseControlsButtons();
-}
-
-function keyboardChosen(){
-  setControlSchemeKeyboard();
-  chooseLevel();
-}
-
-function touchChosen(){
-  setControlSchemeTouch();
-  chooseLevel();
-}
-
 function chooseLevel(){
   playClickSound();
-  keyboardButton.kill();
-  touchButton.kill();
-  backButton.kill();
-  backButton = game.add.button(blockSize * 16, blockSize * 12, 'backButton', backToChooseControls, this, 0, 0, 0);
+  playButton.kill();
+  preferencesButton.kill();
+  instructionsButton.kill();
+  backButton = game.add.button(blockSize * 16, blockSize * 12, 'backButton', backToMenu, this, 0, 0, 0);
   chooseLevelText = game.add.sprite(blockSize * 9, blockSize* 7, 'chooseLevelText');
   levelButton0 = game.add.button(blockSize * 10, blockSize * 8, 'levelButtons', startLevel0, this, 0, 0, 0);
   levelButton1 = game.add.button(blockSize * 12, blockSize * 8, 'levelButtons', startLevel1, this, 1, 1, 1);
@@ -159,14 +120,6 @@ function chooseLevel(){
 
 function backToMenu(){
   playClickSound();
-  keyboardButton.kill();
-  touchButton.kill();
-  backButton.kill();
-  createPlayAndInstructionsButtons();
-}
-
-function backToChooseControls(){
-  playClickSound();
   backButton.kill();
   chooseLevelText.kill();
   levelButton0.kill();
@@ -179,7 +132,7 @@ function backToChooseControls(){
   levelButton7.kill();
   levelButton8.kill();
   levelButton9.kill();
-  createChooseControlsButtons();
+  createPlayAndInstructionsButtons();
 }
 
 function showInstructions(){
@@ -195,45 +148,22 @@ function showPreferences(){
   playButton.kill();
   instructionsButton.kill();
   preferencesButton.kill();
-  preferencesWindow = game.add.sprite(blockSize * 9, blockSize * 3, 'preferencesWindow');
-  //backButton = game.add.button(blockSize * 17, blockSize * 13, 'backButton', exitPreferences, this);
-  if(game.scale.isFullScreen){
-    exitFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'exitFullscreenButton', exitFullscreen, this);
-  }else{
-    goFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'goFullscreenButton', goFullscreen, this);
-  }
+  preferencesWindow = game.add.sprite(blockSize * 9, blockSize * 6, 'preferencesWindow');
 
   if(soundEnabled){
-    soundButton = game.add.button(blockSize * 14.5, blockSize * 5.2, 'checkBoxFilled', setSoundOff, this);
+    soundButton = game.add.button(blockSize * 14.5, blockSize * 8.2, 'checkBoxFilled', setSoundOff, this);
   }else{
-    soundButton = game.add.button(blockSize * 14.5, blockSize * 5.2, 'checkBoxEmpty', setSoundOn, this);
+    soundButton = game.add.button(blockSize * 14.5, blockSize * 8.2, 'checkBoxEmpty', setSoundOn, this);
   }
 
   if(musicEnabled){
-    musicButton = game.add.button(blockSize * 14.5, blockSize * 6.5, 'checkBoxFilled', setMusicOff, this);
+    musicButton = game.add.button(blockSize * 14.5, blockSize * 9.5, 'checkBoxFilled', setMusicOff, this);
   }else{
-    musicButton = game.add.button(blockSize * 14.5, blockSize * 6.5, 'checkBoxEmpty', setMusicOn, this);
+    musicButton = game.add.button(blockSize * 14.5, blockSize * 9.5, 'checkBoxEmpty', setMusicOn, this);
   }
 
-  createTouchPreferenceButtons();
+  exitButton = game.add.button(blockSize * 19.5, blockSize * 6.5, 'exitButton', exitPreferences, this);
 
-  exitButton = game.add.button(blockSize * 19.5, blockSize * 3.5, 'exitButton', exitPreferences, this);
-
-}
-
-function createTouchPreferenceButtons(){
-  if(touchPreference == 0){
-    touchPreferenceButtonLeft = game.add.sprite(blockSize * 11.7, blockSize * 12.9, 'checkBoxFilled');
-    touchPreferenceButtonRight = game.add.button(blockSize * 17.8, blockSize * 12.9, 'checkBoxEmpty', changeTouchPreference1, this);
-  }else{
-    touchPreferenceButtonLeft = game.add.button(blockSize * 11.7, blockSize * 12.9, 'checkBoxEmpty', changeTouchPreference0, this);
-    touchPreferenceButtonRight = game.add.sprite(blockSize * 17.8, blockSize * 12.9, 'checkBoxFilled');
-  }
-}
-
-function killTouchPreferenceButtons(){
-  touchPreferenceButtonLeft.kill();
-  touchPreferenceButtonRight.kill();
 }
 
 function setSoundOff(){
@@ -241,7 +171,7 @@ function setSoundOff(){
   setSoundEnabled(false);
   localStorage.setItem('soundPreference',false);
   soundButton.kill();
-  soundButton = game.add.button(blockSize * 14.5, blockSize * 5.2, 'checkBoxEmpty', setSoundOn, this);
+  soundButton = game.add.button(blockSize * 14.5, blockSize * 8.2, 'checkBoxEmpty', setSoundOn, this);
 }
 
 function setSoundOn(){
@@ -249,7 +179,7 @@ function setSoundOn(){
   setSoundEnabled(true);
   localStorage.setItem('soundPreference',true);
   soundButton.kill();
-  soundButton = game.add.button(blockSize * 14.5, blockSize * 5.2, 'checkBoxFilled', setSoundOff, this);
+  soundButton = game.add.button(blockSize * 14.5, blockSize * 8.2, 'checkBoxFilled', setSoundOff, this);
 }
 
 function setMusicOff(){
@@ -257,7 +187,7 @@ function setMusicOff(){
   setMusicEnabled(false);
   localStorage.setItem('musicPreference',false);
   musicButton.kill();
-  musicButton = game.add.button(blockSize * 14.5, blockSize * 6.5, 'checkBoxEmpty', setMusicOn, this);
+  musicButton = game.add.button(blockSize * 14.5, blockSize * 9.5, 'checkBoxEmpty', setMusicOn, this);
   menuMusic.stop();
 }
 
@@ -266,24 +196,8 @@ function setMusicOn(){
   setMusicEnabled(true);
   localStorage.setItem('musicPreference',true);
   musicButton.kill();
-  musicButton = game.add.button(blockSize * 14.5, blockSize * 6.5, 'checkBoxFilled', setMusicOff, this);
+  musicButton = game.add.button(blockSize * 14.5, blockSize * 9.5, 'checkBoxFilled', setMusicOff, this);
   menuMusic.play();
-}
-
-function changeTouchPreference0(){
-  playClickSound();
-  setTouchPreference(0);
-  localStorage.setItem('touchControlPreference',0);
-  killTouchPreferenceButtons();
-  createTouchPreferenceButtons();
-}
-
-function changeTouchPreference1(){
-  playClickSound();
-  setTouchPreference(1);
-  localStorage.setItem('touchControlPreference',1);
-  killTouchPreferenceButtons();
-  createTouchPreferenceButtons();
 }
 
 function exitPreferences(){
@@ -292,31 +206,7 @@ function exitPreferences(){
   exitButton.kill();
   soundButton.kill();
   musicButton.kill();
-  if(game.scale.isFullScreen){
-    exitFullscreenButton.kill();
-  }else{
-    goFullscreenButton.kill();
-  }
-  killTouchPreferenceButtons();
   createPlayAndInstructionsButtons();
-}
-
-function goFullscreen(){
-  playClickSound();
-  goFullscreenButton.kill();
-  exitFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'exitFullscreenButton', exitFullscreen, this);
-  game.scale.maxWidth = 3840;
-  game.scale.maxHeight = 2160;
-  game.scale.startFullScreen(false);
-}
-
-function exitFullscreen(){
-  playClickSound();
-  exitFullscreenButton.kill();
-  goFullscreenButton = game.add.button(blockSize * 11, blockSize * 8, 'goFullscreenButton', goFullscreen, this);
-  game.scale.maxWidth = 960;
-  game.scale.maxHeight = 640;
-  game.scale.stopFullScreen();
 }
 
 function exitInstructions(){
