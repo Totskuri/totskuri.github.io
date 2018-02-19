@@ -71,7 +71,7 @@ MAIN
 }
 
 .pbox {
-  font-size: 1.6em;
+  font-size: 1.4em;
   border-radius: 5px;
   background-color: #114b5f;
   color: #f3e9d2;
@@ -84,8 +84,30 @@ MAIN
 }
 
 .orbit {
-  width: 720px;
+  width: 480px;
   padding: 15px 0;
+}
+
+.gridstyle {
+  padding: 20px;
+  margin: 10px;
+  font-size: 21px;
+  line-height: 1.3em;
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  background-color: #f3e9d2;
+  border-color: #1a936f;
+}
+
+.boxstyle {
+  margin: 10px auto;
+  padding: 20px;
+  font-size: 21px;
+  line-height: 1.3em;
+  border: 2px dashed #fff;
+  border-radius: 10px;
+  background-color: #f3e9d2;
+  border-color: #1a936f;
 }
 
 /*
