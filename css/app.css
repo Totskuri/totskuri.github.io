@@ -3,13 +3,13 @@ GENERAL
 */
 
 body {
-  font-family: Helvetica, sans-serif;
+  font-family: 'Roboto', sans-serif;
+  overflow-x: hidden;
 }
 
 hr {
-  border-color: #114b5f;
-  width: 80%;
-  margin:0px;
+  border-color: rgba(0, 0 ,0, 0.5);
+  margin:15px 0;
 }
 
 .wrap {
@@ -29,13 +29,19 @@ HERO
 }
 
 .hero h1 {
+  font-family: 'Lobster', cursive;
+}
 
+.hero a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.5em;
 }
 
 .mascot {
-  width: 512px;
-  height: 512px;
-  background-image: url("../img/octopus.png");
+  width: 100%;
+  height: 100%;
+  max-width: 512px;
+  max-height: 512px;
 }
 
 .hero a span {
@@ -58,11 +64,12 @@ MAIN
 }
 
 .main h3 {
+  font-family: 'Lobster', cursive;
   padding-top: 15px;
 }
 
 .main p {
-  width: 80%;
+  width: 90%;
 }
 
 .pboxes {
@@ -84,7 +91,7 @@ MAIN
 }
 
 .orbit {
-  width: 480px;
+  width: 80%;
   padding: 15px 0;
 }
 
