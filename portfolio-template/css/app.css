@@ -1,4 +1,30 @@
 /*
+LOADING
+*/
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
+.pace-inactive {
+  display: none;
+}
+
+.pace .pace-progress {
+  background: var(--second-main-color);
+  position: fixed;
+  z-index: 2000;
+  top: 0;
+  right: 100%;
+  width: 100%;
+  height: 2px;
+}
+
+/*
 GENERAL
 */
 
@@ -135,6 +161,7 @@ HERO
 }
 
 .hero .regular-text{
+  font-family: 'Karma', serif;
   padding-bottom: 50px;
   font-size: 6em;
   font-weight: 500;
@@ -187,6 +214,7 @@ MAIN
 }
 
 .about-title{
+  font-family: 'Karma', serif;
   padding: 15px 0;
   font-size: 4em;
 }
@@ -445,28 +473,39 @@ MEDIA QUERY
     font-size: 2em;
   }
 
-  .contact-main a{
-    font-size: 2em;
+  .main{
+    padding: 40px 0;
   }
 
   .main h1{
     font-size: 1em;
+    padding-bottom: 20px;
   }
 
   .main p{
     font-size: 1.2em;
+    padding-bottom: 20px;
   }
 
   .main a{
     font-size: 1em;
   }
 
+  .featured{
+    padding: 40px 0;
+  }
+
   .featured h1{
     font-size: 1em;
+    padding-bottom: 30px;
   }
 
   .featured a{
     font-size: 1em;
+  }
+
+  .owl-carousel{
+    padding-bottom: 20px;
   }
 
   .work-main{
@@ -526,6 +565,38 @@ MEDIA QUERY
   .about-bg{
     height: 280px;
   }
+
+  .contact-main{
+    padding: 30px 0;
+  }
+
+  .contact-main h1{
+    font-size: 1.5em;
+    padding-bottom: 10px;
+  }
+
+  .contact-main a{
+    font-size: 2em;
+  }
+
+  .contact-main p{
+    padding-top: 10px;
+    font-size: 1.5em;
+  }
+
+  .contact-follow{
+    padding-bottom: 50px;
+  }
+
+  .contact-follow h1{
+    font-size: 1.5em;
+    padding-bottom: 10px;
+  }
+
+  .work-grid{
+    padding-bottom: 40px;
+  }
+
 }
 
 @media (max-width: 480px){
