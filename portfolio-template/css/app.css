@@ -48,6 +48,7 @@ GENERAL
 }
 
 body {
+  background-color: black;
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
 }
@@ -224,6 +225,7 @@ MAIN
 
 .main-about{
   padding-bottom: 60px;
+  background-color: var(--third-main-color);
 }
 
 .about-title{
@@ -275,6 +277,11 @@ MAIN
 
 .work-main{
   padding: 80px 0;
+  background-color: var(--third-main-color);
+}
+
+.work-images{
+  background-color: var(--third-main-color);
 }
 
 .work-main h1{
@@ -535,6 +542,7 @@ MEDIA QUERY
 
   .main-about{
     padding-bottom: 20px;
+
   }
 
   .about-title{
