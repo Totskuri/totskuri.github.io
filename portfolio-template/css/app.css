@@ -48,7 +48,6 @@ GENERAL
 }
 
 body {
-  background-color: black;
   font-family: 'Roboto', sans-serif;
   overflow-x: hidden;
 }
@@ -99,6 +98,7 @@ MOBILE NAV
 }
 
 #mobile-menu a{
+  outline: none;
   color: rgba(255, 255 ,255, 0.6);
   font-weight: bold;
   line-height: 2;
@@ -171,14 +171,12 @@ HERO
   font-size: 2em;
   padding-top: 25vh;
   padding-bottom: 50px;
-  font-weight: 400;
 }
 
 .hero .regular-text{
   font-family: 'Karma', serif;
   padding-bottom: 50px;
   font-size: 6em;
-  font-weight: 500;
   max-width: 650px;
   color: var(--third-main-color);
 }
@@ -186,7 +184,6 @@ HERO
 .hero p span{
   padding-bottom: 50px;
   font-size: 2em;
-  font-weight: 500;
   padding-right: 40%;
   color: var(--third-main-color);
 }
@@ -205,7 +202,7 @@ MAIN
 */
 
 .main{
-  background-color: #ffffff;
+  background-color: var(--third-main-color);
   padding: 80px 0;
 }
 
@@ -213,13 +210,11 @@ MAIN
   color: var(--second-main-color);
   font-size: 2em;
   padding-bottom: 50px;
-  font-weight: 400;
 }
 
 .main p{
   padding-bottom: 50px;
   font-size: 1.8em;
-  font-weight: 500;
   max-width: 650px;
 }
 
@@ -265,7 +260,6 @@ MAIN
 .featured h1{
   font-size: 2em;
   padding-bottom: 50px;
-  font-weight: 400;
 }
 
 .featured a{
@@ -498,7 +492,7 @@ MEDIA QUERY
   }
 
   .main h1{
-    font-size: 1em;
+    font-size: 1.5em;
     padding-bottom: 20px;
   }
 
@@ -516,7 +510,7 @@ MEDIA QUERY
   }
 
   .featured h1{
-    font-size: 1em;
+    font-size: 1.5em;
     padding-bottom: 30px;
   }
 
