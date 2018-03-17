@@ -117,6 +117,10 @@ HERO
   color: white;
 }
 
+.site-logo{
+  max-height: 128px;
+}
+
 /*
 MAIN
 */
@@ -176,10 +180,6 @@ MAIN
   max-height: 360px;
 }
 
-.orbit ul{
-
-}
-
 .portfolio-grid{
   padding: 20px 0;
 }
@@ -190,7 +190,6 @@ MAIN
 }
 
 .portfolio-wrap{
-  padding: 0 25px;
   padding-bottom: 20px;
 }
 
@@ -228,10 +227,11 @@ FOOTER
 
 footer {
   background-color: #222;
-  padding: 40px 0px;
+  padding-bottom: 40px;
 }
 
 footer h4 {
+  padding-top: 40px;
   color: rgba(255, 255 ,255, 0.8);
   font-size: 1.3em;
 }
@@ -262,5 +262,13 @@ MEDIA QUERY
 @media (max-width: 640px) {
   .nav-desktop {
     display: none;
+  }
+
+  .services-grid .img-padding{
+    padding-top: 60px;
+  }
+
+  .site-logo{
+    max-height: 96px;
   }
 }
