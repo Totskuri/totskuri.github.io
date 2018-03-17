@@ -166,6 +166,10 @@ HERO
   min-height: 95vh;
 }
 
+.site-logo{
+  max-height: 96px;
+}
+
 .hero h1 {
   color: var(--second-main-color);
   font-size: 2em;
@@ -610,6 +614,10 @@ MEDIA QUERY
 
   .work-grid{
     padding-bottom: 40px;
+  }
+
+  .site-logo{
+    max-height: 48px;
   }
 
 }
